@@ -34,22 +34,16 @@
         "aarch64-linux"
       ];
       # perSystem = { config, self', inputs', pkgs, system, ... }: {
-      perSystem = { config, pkgs, inputs, inputs',  ... }: {
+      perSystem = { config, pkgs, inputs', ... }: {
         # Per-system attributes can be defined here. The self' and inputs'
         # module parameters provide easy access to attributes of the same
         # system.
 
-        # packages = rec {
-        #   default = ist-discord-bot-env;
-        #   ist-discord-bot-env = pkgs.callPackage ./package.nix {  };
-
-        # };
         packages = import ./packages { inherit pkgs; inherit inputs; inherit inputs'; };
 
         devShells.default = pkgs.mkShell {
           #Add executable packages to the nix-shell environment.
           packages = with pkgs; [
-            pkgs.nodejs_18
           ];
 
           shellHook = ''
@@ -60,7 +54,7 @@
         pre-commit = {
           check.enable = true;
           settings.settings = {
-              deadnix.edit = true;
+            deadnix.edit = true;
           };
           settings.hooks = {
             actionlint.enable = true;
