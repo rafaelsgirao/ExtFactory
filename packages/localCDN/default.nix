@@ -1,4 +1,4 @@
-{ fetchgit, runCommand,  ... }:
+{ lib, fetchgit, runCommand,  ... }:
 
 runCommand "localCDN"
 rec {
