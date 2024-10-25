@@ -48,6 +48,7 @@
           #Add executable packages to the nix-shell environment.
           packages = with pkgs; [
             prefetch-npm-deps
+            nodejs_18
           ];
 
           shellHook = ''
@@ -57,13 +58,12 @@
         };
         pre-commit = {
           check.enable = true;
-          settings.settings = {
-            deadnix.edit = true;
-          };
           settings.hooks = {
             actionlint.enable = true;
-            # denolint.enable = true;
-            deadnix.enable = true;
+            deadnix = {
+                enable = true;
+                settings.edit = true;
+            };
             statix.enable = true;
             markdownlint.enable = true;
             prettier.enable = true;
