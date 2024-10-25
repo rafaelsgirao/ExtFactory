@@ -1,4 +1,11 @@
-{ chromedriver, lib, fetchFromGitHub, buildNpmPackage, nodejs_18, ... }:
+{
+  chromedriver,
+  lib,
+  fetchFromGitHub,
+  buildNpmPackage,
+  nodejs_18,
+  ...
+}:
 buildNpmPackage rec {
   pname = "SponsorBlock";
   version = "5.9.5";
@@ -19,25 +26,25 @@ buildNpmPackage rec {
 
   nativeBuildInputs = [ chromedriver ];
   propagatedBuildInputs = [ chromedriver ];
-    # npmPackFlags = [ "--ignore-scripts" ];
-      npmFlags = [ 
-      "--ignore-scripts"
-      "--legacy-peer-deps"
-      "--loglevel=verbose" ];
+  # npmPackFlags = [ "--ignore-scripts" ];
+  npmFlags = [
+    "--ignore-scripts"
+    "--legacy-peer-deps"
+    "--loglevel=verbose"
+  ];
 
+  nodejs = nodejs_18;
+  dontNpmInstall = true;
+  dontNpmBuild = true;
 
-nodejs = nodejs_18;
-dontNpmInstall = true;
-dontNpmBuild = true;
-
-patches = [ ./chromedriver.patch ];
+  patches = [ ./chromedriver.patch ];
 
   # npmDepsHash = "sha256-g9TFjaMQPxcrSWjtcDPs+BnzIiDUvAJ9OTxFk5rZCTk=";
   postPatch = ''
     cp ${./package-lock.json} ./package-lock.json
   '';
 
-  buildPhase =  ''
+  buildPhase = ''
     # set -x
 
     cat maze-utils/src/version.json
@@ -67,4 +74,3 @@ patches = [ ./chromedriver.patch ];
   npmDepsHash = "sha256-VNcFmEYiPsQKmauYw4Wce2AEVbD3NqIdgtIUWUiZv7Q=";
 
 }
-

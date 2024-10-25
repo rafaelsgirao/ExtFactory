@@ -1,4 +1,10 @@
-{ lib, fetchFromGitHub, buildNpmPackage, nodejs_18, ... }:
+{
+  lib,
+  fetchFromGitHub,
+  buildNpmPackage,
+  nodejs_18,
+  ...
+}:
 buildNpmPackage rec {
   pname = "DarkReader";
   version = "4.9.95";
@@ -16,11 +22,10 @@ buildNpmPackage rec {
     homepage = "TODO";
   };
 
-nodejs = nodejs_18;
-dontNpmInstall = true;
+  nodejs = nodejs_18;
+  dontNpmInstall = true;
 
   npmDepsHash = "sha256-e41PXGgoQkVSHQj6kElqXPhzc6irnr09ltBAPmcUjik=";
-
 
   installPhase = ''
     mkdir $out
@@ -32,4 +37,3 @@ dontNpmInstall = true;
   '';
 
 }
-

@@ -1,17 +1,24 @@
-{ lib, fetchFromGitHub, python3, stdenv, zip, ... }:
+{
+  lib,
+  fetchFromGitHub,
+  python3,
+  stdenv,
+  zip,
+  ...
+}:
 let
-    uAssets-main = fetchFromGitHub {
-        owner = "uBlockOrigin";
-        repo = "uAssets";
-        rev = "63bd225a8a7258bff5002b29696e6c038bb99969";
-        hash = "sha256-4O/xdW1TSqjUrF8RwO16M1bvxQ4TAIxo8/xYbYa2Er8=";
-    };
-    uAssets-prod = fetchFromGitHub {
-        owner = "uBlockOrigin";
-        repo = "uAssets";
-        rev = "97daaf58481b4e82c8fd17b9702749b9db1c1afa";
-        hash = "sha256-hAFbwA5Ur3Xw9B9zTe5QIVry0LAb60UH3sN5dty7uec=";
-    };
+  uAssets-main = fetchFromGitHub {
+    owner = "uBlockOrigin";
+    repo = "uAssets";
+    rev = "63bd225a8a7258bff5002b29696e6c038bb99969";
+    hash = "sha256-4O/xdW1TSqjUrF8RwO16M1bvxQ4TAIxo8/xYbYa2Er8=";
+  };
+  uAssets-prod = fetchFromGitHub {
+    owner = "uBlockOrigin";
+    repo = "uAssets";
+    rev = "97daaf58481b4e82c8fd17b9702749b9db1c1afa";
+    hash = "sha256-hAFbwA5Ur3Xw9B9zTe5QIVry0LAb60UH3sN5dty7uec=";
+  };
 in
 stdenv.mkDerivation rec {
   pname = "uBlockOrigin";
@@ -30,8 +37,11 @@ stdenv.mkDerivation rec {
     homepage = "TODO";
   };
 
-  nativeBuildInputs = [ python3 zip ];
-  buildPhase =  ''
+  nativeBuildInputs = [
+    python3
+    zip
+  ];
+  buildPhase = ''
     # set -x
     # mkdir $out
 
@@ -39,7 +49,7 @@ stdenv.mkDerivation rec {
     mkdir -p dist/build/uAssets
     cp -R ${uAssets-main} dist/build/uAssets/main
     cp -R ${uAssets-prod} dist/build/uAssets/prod
-    
+
     bash tools/make-chromium.sh ${version}
     bash tools/make-firefox.sh ${version}
     bash tools/make-thunderbird.sh ${version}

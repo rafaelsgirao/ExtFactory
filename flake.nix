@@ -15,7 +15,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
-  outputs = inputs@{ flake-parts, ... }:
+  outputs =
+    inputs@{ flake-parts, ... }:
     flake-parts.lib.mkFlake { inherit inputs; } {
       imports = [
         # To import a flake module
@@ -29,6 +30,7 @@
       ];
       flake = {
         # Put your original flake attributes here.
+
       };
       #systems = [ "x86_64-linux" "aarch64-linux" "aarch64-darwin" "x86_64-darwin" ];
       systems = [
@@ -37,43 +39,53 @@
         "aarch64-linux"
       ];
       # perSystem = { config, self', inputs', pkgs, system, ... }: {
-      perSystem = { config, pkgs, inputs', ... }: {
-        # Per-system attributes can be defined here. The self' and inputs'
-        # module parameters provide easy access to attributes of the same
-        # system.
+      perSystem =
+        {
+          config,
+          pkgs,
+          inputs',
+          ...
+        }:
+        {
+          # Per-system attributes can be defined here. The self' and inputs'
+          # module parameters provide easy access to attributes of the same
+          # system.
 
-        packages = import ./packages { inherit pkgs; inherit inputs; inherit inputs'; };
-
-        devShells.default = pkgs.mkShell {
-          #Add executable packages to the nix-shell environment.
-          packages = with pkgs; [
-            prefetch-npm-deps
-            nodejs_18
-          ];
-
-          shellHook = ''
-            export DEBUG=1
-            ${config.pre-commit.installationScript}
-          '';
-        };
-        pre-commit = {
-          check.enable = true;
-          settings.hooks = {
-          check-merge-conflicts.enable = true;
+          packages = import ./packages {
+            inherit pkgs;
+            inherit inputs;
+            inherit inputs';
           };
-        };
-        treefmt.projectRootFile = ./flake.nix;
-        treefmt.programs = {
+
+          devShells.default = pkgs.mkShell {
+            #Add executable packages to the nix-shell environment.
+            packages = with pkgs; [
+              prefetch-npm-deps
+              nodejs_18
+            ];
+
+            shellHook = ''
+              export DEBUG=1
+              ${config.pre-commit.installationScript}
+            '';
+          };
+          pre-commit = {
+            check.enable = true;
+            settings.hooks = {
+              check-merge-conflicts.enable = true;
+              treefmt.enable = true;
+              markdownlint.enable = true;
+              nixfmt-rfc-style.enable = true;
+            };
+          };
+          treefmt.projectRootFile = ./flake.nix;
+          treefmt.programs = {
             actionlint.enable = true;
             deadnix.enable = true;
-          nixpkgs-fmt.enable = true;
-          yamlfmt.enable = true;
-          shfmt.enable = true;
-          mdformat.enable = true;
-          statix.enable = true;
-            markdownlint.enable = true;
+            yamlfmt.enable = true;
+            mdformat.enable = true;
+            statix.enable = true;
+          };
         };
-      };
     };
 }
-
