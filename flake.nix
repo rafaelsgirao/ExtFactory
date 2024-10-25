@@ -81,11 +81,18 @@
           treefmt.projectRootFile = ./flake.nix;
           treefmt.programs = {
             actionlint.enable = true;
-            deadnix.enable = true;
-            yamlfmt.enable = true;
-            mdformat.enable = true;
-            statix.enable = true;
+            # denolint.enable = true;
+            markdownlint.enable = true;
+            treefmt.enable = true;
           };
         };
+        treefmt.projectRootFile = ./flake.nix;
+        treefmt.programs = {
+          deadnix.enable = true;
+          nixpkgs-fmt.enable = true;
+          mdformat.enable = true;
+          statix.enable = true;
+        };
+      };
     };
 }
