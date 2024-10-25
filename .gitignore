@@ -1,4 +1,9 @@
-# Manual gitignore entries can be found after these auto-generated ones.
+# Manual gitignore entries.
+.direnv
+.pre-commit-config.yaml
+result
+ext-repos
+
 
 # Created by https://www.toptal.com/developers/gitignore/api/git,osx,vim,linux,macos,archive,visualstudiocode,windows,node
 # Edit at https://www.toptal.com/developers/gitignore?templates=git,osx,vim,linux,macos,archive,visualstudiocode,windows,node
@@ -319,7 +324,3 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.toptal.com/developers/gitignore/api/git,osx,vim,linux,macos,archive,visualstudiocode,windows,node
-
-.direnv
-.pre-commit-config.yaml
-result
