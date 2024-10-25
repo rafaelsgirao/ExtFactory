@@ -47,6 +47,7 @@
         devShells.default = pkgs.mkShell {
           #Add executable packages to the nix-shell environment.
           packages = with pkgs; [
+            prefetch-npm-deps
           ];
 
           shellHook = ''
