@@ -1,4 +1,4 @@
-{ lib, fetchgit, fetchFromGitHub, python3, stdenv, zip, ... }:
+{ lib, fetchFromGitHub, python3, stdenv, zip, ... }:
 let
     uAssets-main = fetchFromGitHub {
         owner = "uBlockOrigin";
