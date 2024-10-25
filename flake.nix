@@ -5,8 +5,8 @@
       url = "github:hercules-ci/flake-parts";
       inputs.nixpkgs-lib.follows = "nixpkgs";
     };
-    pre-commit-hooks-nix = {
-      url = "github:cachix/pre-commit-hooks.nix";
+    git-hooks-nix = {
+      url = "github:cachix/git-hooks.nix";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.nixpkgs-stable.follows = "nixpkgs";
     };
@@ -22,7 +22,7 @@
         # 1. Add foo to inputs
         # 2. Add foo as a parameter to the outputs function
         # 3. Add here: foo.flakeModule
-        inputs.pre-commit-hooks-nix.flakeModule
+        inputs.git-hooks-nix.flakeModule
         # inputs.devenv.flakeModule
         inputs.treefmt-nix.flakeModule
 
@@ -59,20 +59,19 @@
         pre-commit = {
           check.enable = true;
           settings.hooks = {
-            actionlint.enable = true;
-            deadnix.enable = true;
-            deadnix.settings.edit = true;
-            statix.enable = true;
-            markdownlint.enable = true;
-            prettier.enable = true;
+          check-merge-conflicts.enable = true;
           };
         };
         treefmt.projectRootFile = ./flake.nix;
         treefmt.programs = {
+            actionlint.enable = true;
+            deadnix.enable = true;
           nixpkgs-fmt.enable = true;
           yamlfmt.enable = true;
           shfmt.enable = true;
           mdformat.enable = true;
+          statix.enable = true;
+            markdownlint.enable = true;
         };
       };
     };
