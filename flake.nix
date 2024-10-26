@@ -74,25 +74,23 @@
             settings.hooks = {
               check-merge-conflicts.enable = true;
               treefmt.enable = true;
-              markdownlint.enable = true;
               nixfmt-rfc-style.enable = true;
             };
           };
           treefmt.projectRootFile = ./flake.nix;
           treefmt.programs = {
-            actionlint.enable = true;
             # denolint.enable = true;
-            markdownlint.enable = true;
-            treefmt.enable = true;
+            # CI
+            actionlint.enable = true;
+            #Markdown
+            mdformat.enable = true;
+            # Nix
+            #nixfmt in treefmt appears broken for now
+            deadnix.enable = true;
+            statix.enable = true;
+            statix.disabled-lints = [ "repeated_keys" ];
+            # Shell
           };
         };
-        treefmt.projectRootFile = ./flake.nix;
-        treefmt.programs = {
-          deadnix.enable = true;
-          nixpkgs-fmt.enable = true;
-          mdformat.enable = true;
-          statix.enable = true;
-        };
-      };
     };
 }
