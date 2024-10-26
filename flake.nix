@@ -75,6 +75,7 @@
               check-merge-conflicts.enable = true;
               treefmt.enable = true;
               nixfmt-rfc-style.enable = true;
+              markdownlint.enable = true;
             };
           };
           treefmt.projectRootFile = ./flake.nix;
@@ -83,7 +84,7 @@
             # CI
             actionlint.enable = true;
             #Markdown
-            mdformat.enable = true;
+            #mdformat is also broken...?
             # Nix
             #nixfmt in treefmt appears broken for now
             deadnix.enable = true;
