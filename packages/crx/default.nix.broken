@@ -1,0 +1,28 @@
+ { lib, buildNpmPackage, fetchFromGitHub, }: buildNpmPackage {
+    pname = "crx";
+    version = "unknown"; # ?
+    npmDepsHash = "sha256-xQ0lYd0afnVC+ccwGU98dMWDWcqVvXvKUD5FDdJ9ww8=";
+
+  src = fetchFromGitHub {
+    owner = "thom4parisot";
+    repo = "crx";
+    rev = "23766455f8df72b3d13d3e72101fe632e052383c";
+    hash = "sha256-33+YKeBBCIkxIv7cI0ldyxdBlStOyGi5uJEhgnI+nhs=";
+  };
+    dontNpmBuild = true;
+    dontNpmInstall = true;
+    # dontNpmBuild = true;
+
+lol = true;
+  NODE_OPTIONS = "--openssl-legacy-provider";
+
+    # # use generated package-lock.json as upstream does not provide one
+    # postPatch = ''
+    #   cp ${./package-lock.json} ./package-lock.json
+    # '';
+
+    # installPhase = ''
+    #   mkdir -p $out
+    #   # cp -r node_modules $out/
+    # '';
+  }
