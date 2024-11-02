@@ -5,6 +5,7 @@ rec {
   crx = (pkgs.callPackage ./crx { nodejs = pkgs.nodejs_18; }).package;
 
   # Web extensions.
+  chromium-web-store = pkgs.callPackage ./chromium-web-store { };
   darkreader = pkgs.callPackage ./darkreader { };
   localcdn = pkgs.callPackage ./localcdn { };
   ublockorigin = pkgs.callPackage ./ublockorigin { };

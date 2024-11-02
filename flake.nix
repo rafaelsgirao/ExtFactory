@@ -62,6 +62,8 @@
             packages = with pkgs; [
               prefetch-npm-deps
               nodejs_18
+              # nodePackages.pnpm
+              node2nix
             ];
 
             shellHook = ''
