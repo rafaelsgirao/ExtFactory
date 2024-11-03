@@ -46,7 +46,7 @@
           inputs',
           ...
         }:
-        {
+        rec {
           # Per-system attributes can be defined here. The self' and inputs'
           # module parameters provide easy access to attributes of the same
           # system.
@@ -64,6 +64,8 @@
               nodejs_18
               # nodePackages.pnpm
               node2nix
+              packages.crx
+
             ];
 
             shellHook = ''

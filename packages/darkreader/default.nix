@@ -2,7 +2,7 @@
   lib,
   fetchFromGitHub,
   buildNpmPackage,
-  nodejs_18,
+  nodejs,
   ...
 }:
 buildNpmPackage rec {
@@ -22,7 +22,7 @@ buildNpmPackage rec {
     homepage = "TODO";
   };
 
-  nodejs = nodejs_18;
+  inherit nodejs;
   dontNpmInstall = true;
 
   npmDepsHash = "sha256-e41PXGgoQkVSHQj6kElqXPhzc6irnr09ltBAPmcUjik=";
